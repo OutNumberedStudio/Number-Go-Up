@@ -16,6 +16,8 @@
 //}
 
 //Version 0.1.1 this version there is a button that you press and number goes up and that's it
+//current:
+//adding text that says "press->" and adding text that says "click the BUTTon 5 times" and then fades out after you click 5 times
 
 using UnityEngine;
 using TMPro;
@@ -30,6 +32,9 @@ public class MainClick : MonoBehaviour
     [Header("Audio Settings")]
     public AudioSource audioSource;
     public AudioClip confettiSound;
+
+    [Header("UI Objects")]
+    public GameObject textToHide; //
 
     private void Start()
     {
@@ -49,11 +54,13 @@ public class MainClick : MonoBehaviour
         UpdateTextDisplay();
         Debug.Log("New number value: " + numberclass1);
         //checks if var numberclass = 5
-        if (numberclass1 == 5)
+        if (numberclass1 >= 5 && !isReachedFive)
         {
             isReachedFive = true;
+            FadingText fadingScript = textToHide.GetComponent<FadingText>();
+            fadingScript.FadeAndHide();
             PlayConfettiSound();
-            Debug.Log("Reached 5!");
+            Debug.Log("Reached 5! Text Hidden and Sound played.");
         }
 
     }
